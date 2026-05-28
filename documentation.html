@@ -1,0 +1,1163 @@
+<meta charset="UTF-8">
+<!-- ==================================================
+     HYPER SHOT DOCUMENTATION PAGE - START
+     ================================================== -->
+<style>
+    html,
+    body{
+        margin:0;
+        background:#000000;
+    }
+
+    .hyper-shot-page,
+    .hyper-shot-page *{
+        box-sizing:border-box;
+    }
+
+    .hyper-shot-page{
+        overflow-wrap:anywhere;
+        -webkit-text-size-adjust:100%;
+        scroll-behavior:smooth;
+    }
+
+    .hyper-shot-page > div[style*="max-width:940px"]{
+        width:100%;
+    }
+
+    .hyper-shot-page img,
+    .hyper-shot-page video,
+    .hyper-shot-page iframe{
+        max-width:100% !important;
+    }
+
+    .hyper-shot-page img,
+    .hyper-shot-page video{
+        height:auto !important;
+    }
+
+    .hyper-shot-page .ratio{
+        position:relative;
+        width:100%;
+        aspect-ratio:16 / 9;
+    }
+
+    .hyper-shot-page .ratio > iframe{
+        display:block;
+        width:100% !important;
+        height:100% !important;
+        border:0;
+    }
+
+    .feature-rail{
+        position:fixed;
+        top:50%;
+        right:max(18px,calc((100vw - 1120px) / 2));
+        z-index:20;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        transform:translateY(-50%);
+    }
+
+    .feature-rail a{
+        width:7px;
+        height:24px;
+        border-radius:999px;
+        background:rgba(255,255,255,0.2);
+        border:1px solid rgba(255,255,255,0.1);
+        box-shadow:0 0 0 rgba(255,255,255,0);
+        transition:height .35s ease,background-color .35s ease,border-color .35s ease,box-shadow .35s ease,opacity .35s ease;
+        opacity:.58;
+    }
+
+    .feature-rail a:hover,
+    .feature-rail a.is-active{
+        height:42px;
+        background:#ffffff;
+        border-color:rgba(255,255,255,0.65);
+        box-shadow:0 0 22px rgba(255,255,255,0.22);
+        opacity:1;
+    }
+
+    .doc-hero,
+    .doc-video,
+    .doc-card{
+        position:relative;
+    }
+
+    .doc-hero h1{
+        line-height:1.02 !important;
+    }
+
+    .doc-video{
+        transform:translateY(0);
+        transition:transform .38s ease,border-color .38s ease,box-shadow .38s ease;
+    }
+
+    .doc-video:hover{
+        transform:translateY(-3px);
+        border-color:rgba(255,255,255,0.26) !important;
+        box-shadow:0 28px 70px rgba(0,0,0,0.44),inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .doc-card{
+        position:relative;
+        isolation:isolate;
+        overflow:hidden;
+        transform:translateY(0);
+        transition:transform .34s ease,border-color .34s ease,box-shadow .34s ease;
+        will-change:transform;
+    }
+
+    .doc-card > *{
+        position:relative;
+        z-index:1;
+    }
+
+    .doc-card::before{
+        content:attr(data-giant);
+        position:absolute;
+        right:-.08em;
+        bottom:-.23em;
+        z-index:0;
+        max-width:120%;
+        color:#ffffff;
+        font-size:clamp(70px,15vw,190px);
+        font-weight:800;
+        line-height:.82;
+        letter-spacing:0;
+        opacity:.038;
+        pointer-events:none;
+        white-space:nowrap;
+        text-transform:uppercase;
+    }
+
+    .doc-card:hover{
+        transform:translateY(-4px);
+        border-color:rgba(255,255,255,0.22) !important;
+        box-shadow:inset 0 1px 0 rgba(255,255,255,0.1),0 32px 76px rgba(0,0,0,0.34);
+    }
+
+    .doc-card h2{
+        line-height:1.08 !important;
+    }
+
+    .doc-card h3,
+    .doc-card h4{
+        line-height:1.2 !important;
+    }
+
+    .doc-card li::marker{
+        color:rgba(255,255,255,0.45);
+    }
+
+    .doc-card code{
+        display:inline-block;
+        max-width:100%;
+        padding:.08em .36em;
+        border:1px solid rgba(255,255,255,0.12);
+        border-radius:7px;
+        background:rgba(255,255,255,0.07);
+        color:#ffffff;
+        font-size:.92em;
+        line-height:1.35;
+        vertical-align:.04em;
+    }
+
+    .doc-card div[style*="background:rgba(255,255,255,0.03)"]{
+        box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .doc-toc-grid{
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:14px;
+        margin-top:34px;
+    }
+
+    .doc-toc-link{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        min-height:82px;
+        padding:22px 24px;
+        color:#ffffff;
+        text-decoration:none;
+        border:1px solid rgba(255,255,255,0.09);
+        border-radius:18px;
+        background:rgba(255,255,255,0.035);
+        transition:transform .28s ease,border-color .28s ease,background-color .28s ease,box-shadow .28s ease;
+    }
+
+    .doc-toc-link:hover{
+        transform:translateY(-2px);
+        border-color:rgba(255,255,255,0.22);
+        background:rgba(255,255,255,0.055);
+        box-shadow:0 18px 38px rgba(0,0,0,0.24);
+    }
+
+    .doc-toc-title{
+        display:block;
+        font-size:1.08em;
+        font-weight:650;
+        line-height:1.2;
+        color:#ffffff;
+    }
+
+    .doc-toc-note{
+        display:block;
+        margin-top:6px;
+        font-size:.92em;
+        line-height:1.35;
+        color:#8f8f94;
+    }
+
+    .doc-toc-arrow{
+        flex:0 0 auto;
+        margin-left:18px;
+        color:#a1a1a6;
+        font-size:1.18em;
+        line-height:1;
+        transition:transform .28s ease,color .28s ease;
+    }
+
+    .doc-toc-link:hover .doc-toc-arrow{
+        color:#ffffff;
+        transform:translateX(3px);
+    }
+
+    .reveal-ready .reveal-item{
+        opacity:0;
+        transform:translateY(24px);
+        transition:opacity .72s ease,transform .72s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal-ready .reveal-item.is-visible{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+    @media (max-width:1100px){
+        .feature-rail{
+            display:none;
+        }
+    }
+
+    @media (hover:none), (pointer:coarse){
+        .doc-video:hover,
+        .doc-card:hover{
+            transform:none;
+        }
+
+        .doc-card:hover{
+            box-shadow:none;
+        }
+
+        .doc-toc-link:hover{
+            transform:none;
+            box-shadow:none;
+        }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+        .hyper-shot-page *,
+        .hyper-shot-page *::before,
+        .hyper-shot-page *::after{
+            transition:none !important;
+            animation:none !important;
+            scroll-behavior:auto !important;
+        }
+
+        .reveal-ready .reveal-item{
+            opacity:1 !important;
+            transform:none !important;
+        }
+
+        .doc-card,
+        .doc-video{
+            transform:none !important;
+        }
+    }
+
+    @media (max-width:820px){
+        .hyper-shot-page > div[style*="padding:0 40px"]{
+            padding-left:32px !important;
+            padding-right:32px !important;
+        }
+
+        .hyper-shot-page > div[style*="background-color:#151516"]{
+            padding:48px 34px !important;
+            border-radius:28px !important;
+        }
+
+        .hyper-shot-page h1{
+            font-size:3em !important;
+            letter-spacing:0 !important;
+        }
+
+        .hyper-shot-page h2{
+            font-size:2.25em !important;
+            letter-spacing:0 !important;
+        }
+
+        .hyper-shot-page h3{
+            font-size:1.45em !important;
+        }
+
+        .hyper-shot-page h4{
+            font-size:1.22em !important;
+        }
+
+        .hyper-shot-page p,
+        .hyper-shot-page ul,
+        .hyper-shot-page ol{
+            font-size:1.08em !important;
+            line-height:1.58 !important;
+        }
+
+        .doc-card::before{
+            right:-.12em;
+            bottom:-.16em;
+            font-size:clamp(64px,22vw,132px);
+            opacity:.03;
+        }
+    }
+
+    @media (max-width:640px){
+        .hyper-shot-page{
+            padding:36px 14px !important;
+            border-radius:28px !important;
+        }
+
+        .hyper-shot-page > div[style*="background-color:#151516"]{
+            margin-bottom:40px !important;
+            padding:34px 24px !important;
+            border-radius:24px !important;
+        }
+
+        .hyper-shot-page > div[style*="padding:0 40px"]{
+            padding-left:24px !important;
+            padding-right:24px !important;
+        }
+
+        .doc-video{
+            margin-bottom:40px !important;
+            border-radius:18px !important;
+        }
+
+        .hyper-shot-page h1{
+            font-size:2.45em !important;
+        }
+
+        .hyper-shot-page h2{
+            font-size:2em !important;
+        }
+
+        .hyper-shot-page h3{
+            font-size:1.34em !important;
+        }
+
+        .hyper-shot-page h4{
+            font-size:1.16em !important;
+        }
+
+        .hyper-shot-page p,
+        .hyper-shot-page ul,
+        .hyper-shot-page ol{
+            font-size:1.02em !important;
+            line-height:1.58 !important;
+        }
+
+        .hyper-shot-page ul,
+        .hyper-shot-page ol{
+            padding-left:20px !important;
+        }
+
+        .doc-toc-grid{
+            grid-template-columns:1fr;
+            gap:12px;
+        }
+
+        .doc-toc-link{
+            min-height:72px;
+            padding:20px;
+            border-radius:16px;
+        }
+
+        .doc-card::before{
+            display:none;
+        }
+    }
+
+    @media (max-width:420px){
+        .hyper-shot-page{
+            padding:28px 10px !important;
+            border-radius:22px !important;
+        }
+
+        .hyper-shot-page > div[style*="background-color:#151516"]{
+            padding:26px 18px !important;
+            border-radius:20px !important;
+        }
+
+        .hyper-shot-page > div[style*="padding:0 40px"]{
+            padding-left:18px !important;
+            padding-right:18px !important;
+        }
+
+        .hyper-shot-page h1{
+            font-size:2.08em !important;
+        }
+
+        .hyper-shot-page h2{
+            font-size:1.78em !important;
+        }
+
+        .hyper-shot-page h3{
+            font-size:1.22em !important;
+        }
+
+        .hyper-shot-page p,
+        .hyper-shot-page ul,
+        .hyper-shot-page ol{
+            font-size:1em !important;
+        }
+    }
+</style>
+<div class="hyper-shot-page documentation-page" style="font-family:-apple-system , BlinkMacSystemFont , 'Helvetica Neue' , 'Segoe UI' , Roboto , sans-serif;background-color:#000000;color:#f5f5f7;padding:60px 20px;border-radius:40px;overflow:hidden;">
+    <nav class="feature-rail docs-rail" aria-label="Documentation sections">
+        <a href="#contents" aria-label="Contents"></a>
+        <a href="#installation" aria-label="Installation"></a>
+        <a href="#panel-overview" aria-label="Panel Overview"></a>
+        <a href="#shots" aria-label="Shots"></a>
+        <a href="#overrides" aria-label="Overrides System"></a>
+        <a href="#groups" aria-label="Groups and Multi-Management"></a>
+        <a href="#rendering" aria-label="Rendering and Outputs"></a>
+        <a href="#timeline" aria-label="Timeline Management"></a>
+        <a href="#preferences" aria-label="Preferences"></a>
+    </nav>
+
+    <div class="doc-hero" style="max-width:940px;margin:0 auto 40px;padding:0 40px;"> <h1 style="font-size:3.5em;font-weight:800;text-align:left;letter-spacing:-0.03em;color:#ffffff;margin:0;">Hyper Shot <span style="font-weight:300;color:#a1a1a6;">—</span>&nbsp; Documentation.</h1>
+
+</div>
+
+<div class="doc-video" style="max-width:940px;margin:0 auto 60px;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#151516;"> <div class="ratio ratio-16x9"><iframe class="note-video-clip" frameborder="0" src="https://www.youtube.com/embed/F0p3EKyGr4w" style="display:block;border:0;width:100%;aspect-ratio:16 / 9;height:auto;" width="100%"></iframe></div>
+ </div>
+
+<div id="contents" class="doc-card doc-toc" data-giant="CONTENTS" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;">
+<h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 16px 0;color:#ffffff;">Contents</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;max-width:680px;">Jump straight to the part you need.</p>
+
+<div class="doc-toc-grid">
+<a class="doc-toc-link" href="#installation"><span><span class="doc-toc-title">Installation</span><span class="doc-toc-note">Requirements, install, update, removal.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#panel-overview"><span><span class="doc-toc-title">Panel Overview</span><span class="doc-toc-note">Main menu, lists, inspector, render panel.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#shots"><span><span class="doc-toc-title">Shots</span><span class="doc-toc-note">State management and saved scene data.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#overrides"><span><span class="doc-toc-title">Overrides System</span><span class="doc-toc-note">Render, object, transform, material overrides.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#groups"><span><span class="doc-toc-title">Groups</span><span class="doc-toc-note">Shared visibility, camera links, solo mode.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#rendering"><span><span class="doc-toc-title">Rendering &amp; Outputs</span><span class="doc-toc-note">Batch render, variables, disk scan, ETA.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#timeline"><span><span class="doc-toc-title">Timeline Management</span><span class="doc-toc-note">Markers, ranges, gaps, timeline behavior.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+
+<a class="doc-toc-link" href="#preferences"><span><span class="doc-toc-title">Preferences</span><span class="doc-toc-note">UI location, tracking, render features, utilities.</span></span><span class="doc-toc-arrow" aria-hidden="true">&rarr;</span></a>
+</div>
+
+</div>
+
+<div id="installation" class="doc-card" data-giant="INSTALL" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;">
+<h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Installation</h2>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Requirements</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;"> <strong style="color:#ffffff;">Hyper Shot</strong> is designed for <strong style="color:#ffffff;">Blender 4.2</strong> or newer. Tested on Windows and macOS.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Install From Disk</h3>
+
+<ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Download the <strong style="color:#ffffff;">.zip</strong> file of the addon.</li>
+
+<li style="margin-bottom:8px;">Open Blender and go to <strong style="color:#ffffff;">Edit → Preferences</strong>.</li>
+
+<li style="margin-bottom:8px;">Select the <strong style="color:#ffffff;">Add-ons</strong> section.</li>
+
+<li style="margin-bottom:8px;">Click the arrow icon in the top right corner and choose <strong style="color:#ffffff;">Install From Disk...</strong>
+</li>
+
+<li style="margin-bottom:8px;">Find your .zip file, select it, and click <strong style="color:#ffffff;">Install From Disk</strong>.</li>
+
+<li style="margin-bottom:8px;">Make sure the addon is enabled in the list.</li>
+
+</ol>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Updating and Removal</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 20px 0;">Before you install a new version, always <strong style="color:#ffffff;">Uninstall</strong> the old one.</p>
+
+<ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 32px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Back up your project file (.blend)</li>
+
+<li style="margin-bottom:8px;">Find <strong style="color:#ffffff;">Hyper Shot</strong> in your addon list.</li>
+
+<li style="margin-bottom:8px;">Click <strong style="color:#ffffff;">Remove</strong>.</li>
+
+<li style="margin-bottom:8px;">Restart Blender.</li>
+
+<li style="margin-bottom:8px;">Install the new version.</li>
+
+</ol>
+
+<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:24px;"> <strong style="color:#ffffff;font-size:1.1em;">Note:</strong> <p style="font-size:1.1em;line-height:1.6;color:#86868b;margin:8px 0 0 0;">                Hyper Shot never deletes your scene data. Even if you uninstall the add-on, all shot information is stored safely inside the <code>.blend</code> file. You can reinstall the add-on later and continue working exactly where you left off.            </p>
+
+</div>
+
+</div>
+
+<div id="panel-overview" class="doc-card" data-giant="PANEL" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Panel Overview</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            The <strong style="color:#ffffff;">Hyper Shot</strong> interface is modular and dynamic. By default, you can find the panel in the <strong style="color:#ffffff;">3D Viewport</strong> (press <code>N</code> to open the sidebar) under the "Hyper Shot" tab. You can change this location to the <strong style="color:#ffffff;">Dope Sheet/Timeline</strong> in the add-on Preferences.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Main Menu</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">The top section contains toggle buttons to show or hide different parts of the add-on:</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Inspector:</strong> Shows detailed settings for the selected shot or group.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Groups:</strong> Shows the group management list.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Filters:</strong> Hides or shows shots based on their status. The number in brackets shows how many filters are currently active.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Render:</strong> Shows the batch render queue and progress bar.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Groups</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">This section allows you to link multiple shots together.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Use the <strong style="color:#ffffff;">Add Group</strong> button to create a new group.</li>
+
+<li style="margin-bottom:8px;">Assign shots to a group using the plug icon.</li>
+
+<li style="margin-bottom:8px;">Click the <strong style="color:#ffffff;">Solo</strong> button (star icon) to isolate the group in the list.</li>
+
+<li style="margin-bottom:8px;">You can also cycle through different custom icons to visually identify your groups.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Shots List</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">This is the core list of all your shots.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Use the <strong style="color:#ffffff;">Add Shot</strong> button or the navigation arrows to create and move through shots.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Column Filters:</strong> Above the list, you can toggle which data columns you want to see (Length, Status, Group, Camera, Path).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Quick Actions:</strong> Each row has icons to open the render output folder, select the shot's camera in the viewport, and lock the shot to prevent accidental edits.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Batch Checkbox:</strong> The checkbox on the far left enables the shot for batch rendering.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Inspector</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;">The Inspector area changes depending on what you have selected.</p>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">If a Group is selected:</strong> <p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;">It shows the shared <strong style="color:#ffffff;">Group Camera</strong> and <strong style="color:#ffffff;">Group World</strong>. All shots in this group will use these resources unless overridden.</p>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">If a Shot is selected:</strong> <p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">The Inspector splits into four sections. Click the options icon on the right side of any section header for quick tools (unique for each section).</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Shot Properties:</strong> Basic settings like shot type (Animation/Still), frame range, camera, world, and status.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Shot Render Overrides:</strong> A list of custom render settings applied only to this shot (e.g., a specific sample count). Click the 'X' to remove an override.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Shot Objects Overrides:</strong> A list of custom location, rotation, scale, delta transforms, or material changes for specific objects in this shot.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Shot Output Path:</strong> Shows where the render will be saved. You can use the <strong style="color:#ffffff;">Add Variable</strong> menu to insert dynamic tags (like <code>$shot_name</code>) to automate file naming.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Render</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">Use this section when you have shots ready for rendering.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Render Queue:</strong> A table showing the active render jobs. It displays the shot name, job type (FULL, SKIP, or MISSING), length in frames, and current status (Pending, Running, Done, Error). <strong style="color:#ffffff;">Render Queue</strong> panel appears automatically when render starts.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Progress Bar:</strong> Shows the real-time render progress and estimated time of arrival (ETA) <span style="font-size:19.2px;">for your Animation shots</span>. In Idle mode it shows Shot’s render progress by scanning the output folder.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Render Selected:</strong> Click this button to start rendering all shots that have their batch checkbox enabled.</li>
+
+</ul>
+
+</div>
+
+<div id="shots" class="doc-card" data-giant="SHOTS" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Shots (State Management)</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            A shot represents a specific state of your Blender scene. When you select a shot, the add-on instantly updates the scene to match that saved state.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Shot Types</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">There are two types of shots you can create:</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Animation:</strong> Used for rendering sequences. It saves a specific <strong style="color:#ffffff;">Start Frame</strong> and <strong style="color:#ffffff;">End Frame</strong> (Timeline Range). Animation shots also automatically create visual markers on your timeline so you can easily see where the shot begins and ends.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Still:</strong> Used for rendering single images. On Timeline it saves one specific <strong style="color:#ffffff;">Still Frame</strong>.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">What is Saved</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">When a shot is active, it automatically remembers your scene setup. The saved data includes:</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Visibility:</strong> Which Collections and Objects are hidden or visible in the viewport and render. For Collections, the add-on also strictly saves the <strong style="color:#ffffff;">Exclude from View Layer</strong> state.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Timeline Range:</strong> The playback range for animations (can be changed only via Inspector), or the exact current frame for still shots (can be changed directly via timeline by moving playhead).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Scene Data:</strong> The active Camera and World.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Output:</strong> The render output path.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">3D View:</strong> The current position and rotation of your 3D Viewport (you can turn this on or off in the add-on Preferences).</li>
+
+<li style="margin-bottom:8px;"><strong style="color:#ffffff;">Render Overrides</strong></li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Object Overrides</strong> (Transform, Delta Transform, Material)</li>
+
+</ul>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            Because the active shot saves your changes automatically, you just need to set up your scene in Blender. Hyper Shot handles the saving in the background.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Managing Shots</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;">            Management tools are divided into two areas: <strong style="color:#ffffff;">Quick Actions</strong> located directly in the Shots List rows, and <strong style="color:#ffffff;">Advanced Actions</strong> hidden inside the Inspector's popover menu.        </p>
+
+<h4 style="font-size:1.3em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Quick Actions (Shots List)</h4>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">These tools are available directly on each shot's row in the main list for fast access.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Active Shot:</strong> Only one shot can be active at a time. The active shot is indicated by a highlighted row in the shots list.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Locking (Padlock Icon):</strong> Click the padlock icon next to a shot to lock it. A locked shot is safe. It will ignore any new changes you make to the scene, preventing accidental edits.                <ul style="margin-top:8px;margin-bottom:0;">
+
+<li>
+<em style="color:#86868b;">Tip:</em> Hold <strong style="color:#ffffff;">Shift</strong> while clicking the padlock to lock or unlock <em style="color:#86868b;">all currently visible shots</em> at once.</li>
+
+</ul>
+
+</li>
+
+</ul>
+
+<div style="background:rgba(255,165,0,0.1);border:1px solid rgba(255,165,0,0.2);border-radius:16px;padding:24px;margin-bottom:40px;"> <strong style="color:#ffa500;font-size:1.1em;">⚠️ Important Note on Locked Shots in Groups:</strong> <p style="font-size:1.1em;line-height:1.6;color:#f5f5f7;margin:8px 0 0 0;">                Because shots in a group share the exact same visibility state, locking a single shot does not completely isolate it. If you modify an <em>unlocked</em> shot in the same group, it updates the entire shared group. Consequently, the locked shot will also reflect those changes. To fully protect a group's setup, make sure to lock all shots within that group.            </p>
+
+</div>
+
+<h4 style="font-size:1.3em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Advanced Actions (Inspector Menu)</h4>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">            For deeper management, use the Shot Actions popover. To open it, select a shot, look at the <strong style="color:#ffffff;">Shot Properties</strong> section header in the Inspector, and click the <strong style="color:#ffffff;">Options icon</strong> on the far right. This menu contains the following tools:        </p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 0 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Duplicate Shot:</strong> Creates an exact copy of the active shot. The duplicate will keep all visibility settings, overrides, and camera/world assignments. For animation shots, the timeline range is automatically shifted forward to the next available slot; for still shots, the exact frame is kept.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Copy Data:</strong> Copies the configuration ID of the current shot into memory. This is the first step when you want to transfer settings to another shot.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Paste Data:</strong> Applies the previously copied data to the current shot (or to multiple shots if their batch checkboxes are enabled). When clicked, a dialog will appear allowing you to precisely choose which data parts to transfer (e.g., Visibility only, Camera only, Overrides, or Output Path).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Move Up / Move Down:</strong> Reorders the selected shot by moving it higher or lower in your main Shots List.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Create Collection:</strong> A quick organizational tool. It creates a new collection in the Blender Outliner named exactly after the shot. This new collection is automatically linked to all shots, but safely <strong style="color:#ffffff;">excluded from the view layer</strong> for everyone except the current shot (where it remains visible and ready for your objects).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Delete Shot:</strong> Permanently removes the shot from the list and cleanly deletes its associated cached data and timeline markers.</li>
+
+</ul>
+
+</div>
+
+<div id="overrides" class="doc-card" data-giant="OVERRIDES" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Overrides System</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            Sometimes you need to change a specific property just for one shot, without changing the main scene. Overrides allow you to do this safely.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Render Overrides</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">You can override almost any render setting (like Samples, Render Engine, or Resolution).</p>
+
+<ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Go to the native Blender Render or Output properties.</li>
+
+<li style="margin-bottom:8px;">Right-click on the value you want to change.</li>
+
+<li style="margin-bottom:8px;">Select <strong style="color:#ffffff;">Hyper Shot: Add Override</strong>. The setting will now appear in the Inspector under <em style="color:#86868b;">Shot Render Overrides</em>.</li>
+
+</ol>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            You can also add multiple overrides at once using the <strong style="color:#ffffff;">Quick Favorites</strong> presets accessible from the Inspector's options menu.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Object Overrides</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">You can change an object's <strong style="color:#ffffff;">Location</strong>, <strong style="color:#ffffff;">Rotation</strong>, or <strong style="color:#ffffff;">Scale</strong> for a specific shot. In addition, you can override <strong style="color:#ffffff;">Delta Transforms</strong>.</p>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">Standard vs. Delta Transforms (Crucial Rule)</strong> <p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">It is highly important to choose the correct type of override depending on whether your object is animated in the scene.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">For Static Objects (No Keyframes):</strong> Use standard overrides (Location, Rotation, Scale).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">For Animated Objects (With Keyframes):</strong> You should use Delta Transforms. If you apply a standard transform override to an object that has animation keyframes, Blender's animation system will evaluate the keyframes every frame, meaning your Custom Overrides simply will not work.</li>
+
+</ul>
+
+<div style="background:rgba(255, 165, 0, 0.1);border:1px solid rgba(255, 165, 0, 0.2);border-radius:16px;padding:24px;margin-bottom:24px;"> <strong style="color:#ffa500;font-size:1.1em;">⚠️ Important Note on Override Hierarchy:</strong> <p style="font-size:1.1em;line-height:1.6;color:#f5f5f7;margin:8px 0 0 0;"><span>In Blender, animation keyframes always override standard object transforms (which is exactly where your Custom Overrides live). </span><span>If an object has animation keys, Blender simply ignores your Custom Overrides and forces the object to follow the animation instead. </span><span>That is why we recommend using </span><span>Delta Transform</span><span> overrides for animated objects.</span></p>
+
+</div>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">What are Delta Transforms?</strong> <p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;">In Blender, Delta transforms are mathematically applied <em>on top</em> of the regular transforms. They allow you to safely offset an animated character or prop for a specific shot without destroying or altering its base animation curves. Hyper Shot supports overriding both standard and delta transforms independently.</p>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">How to add a Transform Override:</strong> <ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Right-click on the Object in the 3D Viewport.</li>
+
+<li style="margin-bottom:8px;">Select <strong style="color:#ffffff;">Hyper Shot</strong>.</li>
+
+<li style="margin-bottom:8px;">Choose the type of override based on your object's state (e.g., Location vs. Delta Location).</li>
+
+</ol>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">The override will appear in the Inspector list. Deleting the override safely restores the object to its original (global default) transform.</p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Material Overrides</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">You can swap a material on a specific object just for one shot.</p>
+
+<strong style="color:#ffffff;font-size:1.2em;display:block;margin-bottom:8px;">How to add a Material Override:</strong> <ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Select the object in the 3D Viewport.</li>
+
+<li style="margin-bottom:8px;">Go to Blender's native <strong style="color:#ffffff;">Material Properties</strong> tab.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Right-click</strong> directly on the material you want to change in the slots list.</li>
+
+<li style="margin-bottom:8px;">Select <strong style="color:#ffffff;">Hyper Shot: Add Override</strong> from the context menu.</li>
+
+</ol>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;">            The current material is now "pinned" to this specific slot for the active shot. You can now safely assign a new material to this slot, and the override will remember your custom assignment. It will also appear in the Inspector's Objects Overrides list, where you can easily delete it later.        </p>
+
+<p style="font-size:1.1em;line-height:1.6;color:#86868b;margin:0;font-style:italic;">            Note on Smart Tracking: The add-on tracks materials by their names, not just their list order. If you add, remove, or rearrange other material slots on this object later, your override will not break. The add-on automatically scans and "heals" shifted slot indices to ensure the correct material is always replaced.        </p>
+
+</div>
+
+<div id="groups" class="doc-card" data-giant="GROUPS" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Groups &amp; Multi-Management</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            If you have a large project, setting up the exact same visibility and cameras for 20 different shots takes too much time. Groups solve this problem by linking multiple shots together.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">How Groups Work</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">When you put a shot into a group, it stops using its own visibility settings. Instead, it shares the group's settings.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Shared Visibility:</strong> All shots in a group share the exact same Collection and Object visibility (including "Exclude from View Layer").</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Global Updating:</strong> If you select <em>any</em> active shot inside a group and hide a collection, that change is instantly saved to the group. All other shots in that group will automatically update to match.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Shared Camera and World</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">By default, all shots in a group also share the <strong style="color:#ffffff;">Group Camera</strong> and <strong style="color:#ffffff;">Group World</strong>.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">You can change the Group Camera or World in the Inspector when the group is selected.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Unlinking:</strong> If a shot is in a group but needs its own unique camera or world, go to the Shot Properties in the Inspector. Click the "Chain" icon next to the Camera or World. This breaks the link, allowing that specific shot to use a custom camera while keeping the group's shared visibility.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Creating, Assigning, and Removing</h3>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Create a Group:</strong> Open the <strong style="color:#ffffff;">Groups</strong> panel from the Main Menu and click <strong style="color:#ffffff;">Add Group</strong>. You can rename it and click the icon button to change its visual icon.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Assign a Single Shot:</strong> Select a shot, go to the Inspector, and choose the target group from the "Group" dropdown.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Mass Assign (Bulk):</strong> Check the batch boxes (the square checkboxes on the far left) for several shots. Then, go to the Groups list and click the "Plug" icon next to the group. All checked shots will be assigned to this group at once.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Safe Removal:</strong> To remove a shot from a group, just change its Group dropdown back to "None" in the Inspector or directly in the Shots List. When you do this, the shot will safely copy and keep the group's current visibility, camera, and world so your scene does not break.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Solo Mode</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">If you have 50 shots and 5 groups, the list can get messy.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Click the <strong style="color:#ffffff;">Solo</strong> button (star icon) next to any group.</li>
+
+<li style="margin-bottom:8px;">The Shots List will instantly hide everything else and only show the shots belonging to that group.</li>
+
+<li style="margin-bottom:8px;">You can solo multiple groups at the same time to compare them.</li>
+
+</ul>
+
+</div>
+
+<div id="rendering" class="doc-card" data-giant="RENDER" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Rendering &amp; Outputs</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            Hyper Shot is designed to safely render massive projects. It handles context switching, file naming, and crash recovery for you automatically.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Output Paths &amp; Variables</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">Before rendering, you need to tell Blender where to save your files.</p>
+
+<ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">Select a shot and open the <strong style="color:#ffffff;">Shot Output Path</strong> section in the Inspector.</li>
+
+<li style="margin-bottom:8px;">Instead of manually typing a folder path for every single shot, click <strong style="color:#ffffff;">Add Variable</strong>.</li>
+
+<li style="margin-bottom:8px;">Variables act as smart placeholders. For example, if you add the <code>$shot_name</code> variable into your path, the add-on will automatically create a uniquely named folder for each shot.</li>
+
+<li style="margin-bottom:8px;">This guarantees that your renders will never overwrite each other.</li>
+
+</ol>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Batch Render</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">To render multiple shots sequentially:</p>
+
+<ol style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">In the Shots List, check the box on the far left for every shot you want to render.</li>
+
+<li style="margin-bottom:8px;">Open the <strong style="color:#ffffff;">Render</strong> panel at the bottom of the main menu.</li>
+
+<li style="margin-bottom:8px;">Click the <strong style="color:#ffffff;">Render Selected</strong> button.</li>
+
+<li style="margin-bottom:8px;">A preview window will appear showing you the exact queue of jobs. You can toggle the <strong style="color:#ffffff;">Overwrite</strong> option for individual jobs if you want to force a re-render. Confirm to start. The add-on will automatically switch scenes, apply visibility, and render everything one by one.</li>
+
+</ol>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Smart Disk Analysis</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">When you render an animation, Hyper Shot does something very clever: it scans your hard drive folder before it starts rendering. Based on what it finds, it assigns one of three Job Types to save you massive amounts of time:</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">FULL:</strong> The folder is empty. The add-on will render every frame from start to finish.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">SKIP:</strong> The add-on found all the required frames already perfectly saved on your disk. It will skip this shot entirely and move to the next one.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">MISSING:</strong> The add-on scanned your output folder and found a partially rendered shot (for example, if Blender crashed during the render). Instead of starting from scratch, the job will render <em>only</em> the missing frames to complete the sequence.</li>
+
+</ul>
+
+<p style="font-size:1.1em;line-height:1.6;color:#86868b;margin:0 0 40px 0;font-style:italic;">            Note: If you want to intentionally re-render an animation and overwrite the old files, you can check the "Overwrite" button in the batch render confirmation dialog.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Error Handling</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            If a shot has an error (e.g., missing camera or output path), it will be flagged with a red error icon in the render queue.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Render Queue and ETA</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">While the batch render is running, the <strong style="color:#ffffff;">Render Panel</strong> gives you full control and information:</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Queue Table:</strong> A clean list showing the Shot Name, the Job Type (FULL, SKIP, MISSING), the job duration in frames, and the real-time status (Pending, Running, Done, Error).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Smart Progress Bar:</strong> The add-on calculates your Estimated Time of Arrival (ETA). It remembers how long your previous frames took to render and uses that math to tell you exactly when the entire batch job will be finished. <em style="color:#86868b;">(Note: ETA calculation is only available when rendering Animation shots. Because it relies on averaging previous frame times, it does not apply to single Still shots).</em>
+</li>
+
+</ul>
+
+</div>
+
+<div id="timeline" class="doc-card" data-giant="TIMELINE" style="max-width:940px;margin:0 auto 60px;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Timeline Management</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            Hyper Shot helps you visually organize your Blender timeline using markers and automatic spacing.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Timeline Markers</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">Hyper Shot can automatically create visual markers on the Blender timeline for every Animation shot.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 24px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Start Marker:</strong> A green marker with the shot name and a <code>[</code> prefix.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">End Marker:</strong> A red marker with the shot name and a <code>]</code> suffix.</li>
+
+</ul>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            These markers are purely visual aids to help you see where shots begin and end. They update automatically when you change a shot's name or frame range. You can toggle this feature on or off in the add-on Preferences.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Timeline Gaps (Shot Distance)</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">When you create a new animation shot, Hyper Shot automatically leaves a certain number of empty frames—a "gap"—between the end of your last shot and the beginning of the newly created one.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Why use gaps? (The Domino Effect):</strong> The absolute main purpose of a gap is <strong style="color:#ffffff;">editing flexibility</strong>. Imagine you have 20 back-to-back shots on your timeline with zero empty frames between them. If you suddenly decide to make Shot #2 longer, you would be forced to manually select and push forward the animation data for the remaining 18 shots just to make room! A gap acts as an expansion buffer. It allows you to freely extend the start or end of any shot later in the production without breaking the rest of your timeline.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Secondary Benefits:</strong> Additionally, gaps prevent animation curves or physics simulations from overlapping and give Blender safe room for calculations.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Customizing the Gap:</strong> By default, this distance is set to 50 frames. You can increase or decrease this buffer size in the add-on Preferences (Edit → Preferences → Add-ons → Hyper Shot). If you want to disable gaps entirely, simply set this value to 0. In this case, new animation shots will be created back-to-back with no empty frames between them.</li>
+
+</ul>
+
+</div>
+
+<div id="preferences" class="doc-card" data-giant="PREFS" style="max-width:940px;margin:0 auto 0;background-color:#151516;border:1px solid rgba(255,255,255,0.1);border-radius:32px;padding:60px 40px;"> <h2 style="text-align:left;font-size:2.5em;font-weight:700;letter-spacing:-0.02em;margin:0 0 24px 0;color:#ffffff;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;">Preferences</h2>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;">            To access <strong style="color:#ffffff;">Hyper Shot</strong> settings, go to <strong style="color:#ffffff;">Edit → Preferences → Add-ons</strong> and find <strong style="color:#ffffff;">Hyper Shot</strong>.        </p>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">UI Location</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">This section lets you change where the add-on menu appears.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Panel Location:</strong> Choose between the <strong style="color:#ffffff;">3D Viewport</strong> or the <strong style="color:#ffffff;">Dope Sheet</strong>. If you work mostly with animation, moving the panel to the Dope Sheet can be sometimes helpful.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Panel Name:</strong> Change the name of the sidebar tab. By default, it is called "Hyper Shot".</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Tracking</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">Here you can control what data Hyper Shot is allowed to save and apply.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Collections Visibility:</strong> If enabled, the add-on will remember which collections are hidden or excluded. Keep this ON for normal use.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Objects Visibility:</strong> If enabled, the add-on will remember the visibility of individual objects.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">3D View Position:</strong> By default, this is OFF. If you turn it ON, Hyper Shot will save your exact camera angle and position in the 3D Viewports every time you save a shot. When you select the shot again, your viewports will jump back to that exact angle.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Render Features</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">These settings help you optimize performance and save computer resources during batch rendering.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Enable Progress Bar:</strong> Shows <strong style="color:#ffffff;">Progress Bar</strong> with Estimated Time of Arrival (ETA).</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Enable Disk Scan:</strong> Scans your output folder to find missing frames before rendering. If you turn this OFF, the add-on won’t inform you about already rendered frames and will propose to render the full shot.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Switch to Solid Mode:</strong> If enabled, the add-on will automatically switch all your 3D Viewports to "Solid" shading mode right before a batch render starts. This is recommended because it frees up GPU memory.</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Timeline</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">These settings control how the add-on interacts with your Blender timeline.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 40px 0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Gap Between Clips:</strong> When you click "Add Shot", the add-on automatically places the new shot on the timeline. This setting defines how many empty frames (default is 50) are placed between the end of the last shot and the beginning of the new one.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Use Timeline Markers:</strong> If enabled, the add-on creates visual Start and End markers on the timeline for every animation shot.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Set Up Shot Range:</strong> When you click on a shot, this setting automatically changes the global Start and End playback frames in Blender to match your selected shot.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Center Timeline:</strong> When you select a shot, this setting automatically centers the Timeline editor's view on the shot (for Animation shots) or on the Still Frame (for Still shots).</li>
+
+</ul>
+
+<h3 style="font-size:1.5em;font-weight:600;color:#ffffff;margin:0 0 16px 0;">Utilities</h3>
+
+<p style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0 0 16px 0;">Advanced tools for project management and debugging.</p>
+
+<ul style="font-size:1.2em;line-height:1.6;color:#a1a1a6;margin:0;padding-left:24px;">
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Enable Developer Mode:</strong> Turns on an extra "Log" panel in the UI. It shows system messages, save/apply logs, and error reports. Useful if you want to see exactly what the add-on is doing under the hood.</li>
+
+<li style="margin-bottom:8px;">
+<strong style="color:#ffffff;">Full Reset Addon Data:</strong> It completely deletes all Hyper Shot data from your project file, including all shots, groups, and overrides. Use this only if you want to start shot management completely from scratch.</li>
+
+</ul>
+
+</div>
+
+</div>
+<script>
+(function(){
+    var page = document.querySelector('.hyper-shot-page');
+    if (!page) {
+        return;
+    }
+
+    var reduceMotion = false;
+    if (window.matchMedia) {
+        reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+
+    var revealTargets = page.querySelectorAll('.doc-hero,.doc-video,.doc-card');
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        var hasRevealedItem = false;
+        page.classList.add('reveal-ready');
+        Array.prototype.forEach.call(revealTargets, function(target){
+            target.classList.add('reveal-item');
+        });
+
+        var revealObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if (entry.isIntersecting) {
+                    hasRevealedItem = true;
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            root:null,
+            rootMargin:'0px 0px -8% 0px',
+            threshold:.08
+        });
+
+        Array.prototype.forEach.call(revealTargets, function(target){
+            revealObserver.observe(target);
+        });
+
+        window.setTimeout(function(){
+            if (!hasRevealedItem) {
+                Array.prototype.forEach.call(revealTargets, function(target){
+                    target.classList.add('is-visible');
+                });
+            }
+        }, 3500);
+    }
+
+    var railLinks = page.querySelectorAll('.feature-rail a[href^="#"]');
+    var railSections = [];
+    Array.prototype.forEach.call(railLinks, function(link){
+        var id = link.getAttribute('href').slice(1);
+        var section = document.getElementById(id);
+        if (section) {
+            railSections.push(section);
+        }
+    });
+
+    function setActiveRail(id){
+        Array.prototype.forEach.call(railLinks, function(link){
+            link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+        });
+    }
+
+    if (railSections.length) {
+        setActiveRail(railSections[0].id);
+    }
+
+    if ('IntersectionObserver' in window && railSections.length) {
+        var railObserver = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if (entry.isIntersecting) {
+                    setActiveRail(entry.target.id);
+                }
+            });
+        }, {
+            root:null,
+            rootMargin:'-45% 0px -45% 0px',
+            threshold:0
+        });
+
+        railSections.forEach(function(section){
+            railObserver.observe(section);
+        });
+    }
+})();
+</script>
+<!-- ==================================================
+     HYPER SHOT DOCUMENTATION PAGE - END
+     ================================================== -->
