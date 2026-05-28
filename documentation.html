@@ -1139,6 +1139,32 @@
         setActiveRail(railSections[0].id);
     }
 
+    Array.prototype.forEach.call(page.querySelectorAll('a[href^="#"]'), function(link){
+        link.addEventListener('click', function(event){
+            var id = link.getAttribute('href').slice(1);
+            var target = document.getElementById(id);
+            if (!target) {
+                return;
+            }
+
+            if (window.parent && window.parent !== window) {
+                event.preventDefault();
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, '', '#' + id);
+                }
+                window.parent.postMessage({
+                    type:'hyper-shot-docs-scroll',
+                    targetId:id,
+                    top:Math.round(target.getBoundingClientRect().top + window.pageYOffset)
+                }, '*');
+                target.scrollIntoView({
+                    behavior:reduceMotion ? 'auto' : 'smooth',
+                    block:'start'
+                });
+            }
+        });
+    });
+
     if ('IntersectionObserver' in window && railSections.length) {
         var railObserver = new IntersectionObserver(function(entries){
             entries.forEach(function(entry){
