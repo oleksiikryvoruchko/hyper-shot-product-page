@@ -69,10 +69,82 @@
         opacity:1;
     }
 
+    /* ==================================================
+       SALE CAMPAIGN STRIP - START
+       Disabled for now. Keep this block for future sale campaigns.
+
+    .engineering-strip{
+        position:relative;
+        width:min(940px,100%);
+        margin:-34px auto 72px;
+        overflow:hidden;
+        background:#d2ff2e;
+        color:#1e2600;
+    }
+
+    .engineering-strip-track{
+        display:flex;
+        width:max-content;
+        animation:engineering-strip-scroll 38s linear infinite;
+        will-change:transform;
+    }
+
+    .engineering-strip span{
+        flex:0 0 auto;
+        padding:7px 24px;
+        font-size:.62em;
+        line-height:1;
+        font-weight:650;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        color:#1e2600;
+        white-space:nowrap;
+    }
+
+    .engineering-strip span::after{
+        content:"";
+        display:inline-block;
+        width:5px;
+        height:5px;
+        margin-left:28px;
+        border-radius:50%;
+        background:rgba(30,38,0,0.45);
+        vertical-align:2px;
+    }
+
+    @keyframes engineering-strip-scroll{
+        from{
+            transform:translate3d(0,0,0);
+        }
+
+        to{
+            transform:translate3d(-50%,0,0);
+        }
+    }
+
+       SALE CAMPAIGN STRIP - END
+       ================================================== */
+
     .section-heading,
+    .top-cover,
     .hero-section,
     .final-cta{
         position:relative;
+    }
+
+    .top-cover{
+        max-width:940px;
+        margin:0 auto 72px;
+        overflow:hidden;
+        background:#151516;
+    }
+
+    .top-cover video{
+        display:block;
+        width:100%;
+        height:auto !important;
+        border-radius:0 !important;
+        margin:0;
     }
 
     .hero-video{
@@ -196,6 +268,12 @@
             transform:none !important;
         }
 
+        /* Sale campaign strip is disabled for now.
+        .engineering-strip-track{
+            animation:none !important;
+        }
+        */
+
         .feature-card,
         .hero-video{
             transform:none !important;
@@ -258,6 +336,21 @@
         .hyper-shot-page > div[style*="margin:0 auto 60px"]{
             margin-bottom:40px !important;
         }
+
+        .top-cover{
+            margin-bottom:52px;
+        }
+
+        /* Sale campaign strip is disabled for now.
+        .engineering-strip{
+            margin:-23px auto 52px;
+        }
+
+        .engineering-strip span{
+            padding:7px 20px;
+            font-size:.6em;
+        }
+        */
 
         .hyper-shot-page h2{
             font-size:2.35em !important;
@@ -328,6 +421,12 @@
             gap:24px !important;
         }
 
+        /* Sale campaign strip is disabled for now.
+        .engineering-strip{
+            margin:-10px auto 44px;
+        }
+        */
+
         .hyper-shot-page h2{
             font-size:2.05em !important;
         }
@@ -369,8 +468,44 @@
     </nav>
 
     <!-- ==================================================
+         SALE CAMPAIGN STRIP - START
+         Disabled for now. Use this strip for future sale campaigns.
+
+    <div class="engineering-strip" aria-label="Stored per-shot data">
+        <div class="engineering-strip-track" aria-hidden="true">
+            <span>Visibility</span>
+            <span>Active Camera</span>
+            <span>Active World</span>
+            <span>Output Path</span>
+            <span>Render Overrides</span>
+            <span>Object Transforms</span>
+            <span>Object Materials</span>
+            <span>Timeline Range</span>
+            <span>Viewport Position</span>
+            <span>Visibility</span>
+            <span>Active Camera</span>
+            <span>Active World</span>
+            <span>Output Path</span>
+            <span>Render Overrides</span>
+            <span>Object Transforms</span>
+            <span>Object Materials</span>
+            <span>Timeline Range</span>
+            <span>Viewport Position</span>
+        </div>
+    </div>
+
+         SALE CAMPAIGN STRIP - END
+         ================================================== -->
+
+    <!-- ==================================================
          HERO / INTRO
          ================================================== -->
+    <div class="top-cover" aria-label="Hyper Shot interface preview">
+        <video autoplay muted loop playsinline preload="metadata" aria-label="Hyper Shot cover preview">
+            <source src="assets/keyfeatures/cover.mp4" type="video/mp4">
+        </video>
+    </div>
+
     <div id="intro" class="hero-section" style="max-width:940px;margin:0 auto 80px;padding:0 40px;">
         <p style="font-size:1.5em;line-height:1.5;max-width:800px;text-align:left;font-weight:400;color:#a1a1a6;margin:0;"></p>
 
@@ -943,7 +1078,7 @@
         reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
 
-    var revealTargets = page.querySelectorAll('.hero-section,.section-heading,.feature-card,.stored-shot-section,.final-cta');
+    var revealTargets = page.querySelectorAll('.top-cover,.hero-section,.section-heading,.feature-card,.stored-shot-section,.final-cta');
     if (!reduceMotion && 'IntersectionObserver' in window) {
         var hasRevealedItem = false;
         page.classList.add('reveal-ready');
